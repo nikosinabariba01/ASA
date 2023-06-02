@@ -1,0 +1,56 @@
+Diberikan sebuah array bilangan bulat, dan kamu perlu menemukan panjang dari subsequence menaik terpanjang (LIS) dalam array tersebut.
+
+Subsequence adalah suatu urutan yang dapat diperoleh dari urutan lain dengan menghapus beberapa atau tidak ada elemen tanpa mengubah urutan elemen yang tersisa. Subsequence menaik adalah subsequence dimana elemennya tersusun dalam urutan menaik.
+
+Buatlah sebuah fungsi longest_increasing_subsequence untuk memecahkan masalah ini. Fungsi tersebut harus menerima array bilangan bulat sebagai input dan mengembalikan sebuah bilangan bulat yang mewakili panjang dari subsequence menaik terpanjang.
+
+Input Format
+
+Panjang Array (enter)
+Isi array dimasukkan secara berturut-turut tanpa menggunakan koma
+8  
+10 9 2 5 3 7 101 18
+
+Constraints
+Panjang array input tidak akan melebihi 1000. Elemen-elemen dalam array tersebut akan berupa bilangan bulat dalam rentang -10^9 hingga 10^9.
+
+Output Format
+4
+
+Sample Input 0
+5
+1 2 3 4 5
+
+Sample Output 0
+5
+
+Sample Input 1
+5
+5 4 3 2 1
+
+Sample Output 1
+1
+
+``` python 3
+def longest_increasing_subsequence(arr):
+    n = len(arr)
+    dp = [1] * n
+    
+    for i in range(1, n):
+        for j in range(i):
+            if arr[i] > arr[j]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    
+    return max(dp)
+
+# Membaca panjang array dari input
+n = int(input())
+# Membaca array dari input
+arr = list(map(int, input().split()))
+
+# Memanggil fungsi longest_increasing_subsequence
+result = longest_increasing_subsequence(arr)
+
+# Mencetak hasil output
+print(result)
+```

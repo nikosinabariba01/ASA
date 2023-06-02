@@ -1,0 +1,14 @@
+def select_menu(menu, k):
+    sorted_menu = sorted(menu, reverse=True)  # Urutkan menu berdasarkan kelezatan tertinggi
+    return sorted_menu[:k]  # Ambil K menu teratas
+
+# Membaca masukan
+N = int(input())
+menu_makanan = list(map(int, input().split()))
+K = int(input())
+
+# Pemilihan menu makanan
+selected_menu = select_menu(menu_makanan, K)
+
+# Cetak menu makanan yang dipilih
+print(*selected_menu)

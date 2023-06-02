@@ -1,0 +1,18 @@
+def max_concert_joy(N, J):
+    dp = [0] * N
+
+    dp[0] = J[0]
+
+    dp[1] = max(J[0], J[1])
+
+    for i in range(2, N):
+        dp[i] = max(dp[i-1], dp[i-2] + J[i])
+
+    max_joy = dp[N-1]
+
+    return max_joy
+
+N = int(input())
+J = list(map(int, input().split()))
+max_joy = max_concert_joy(N, J)
+print(max_joy)

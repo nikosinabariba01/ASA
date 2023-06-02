@@ -1,0 +1,36 @@
+def greedy_schedule():
+    events = []  # Daftar acara
+
+    # Menerima input acara dari pengguna
+    n = int(input())
+    for _ in range(n):
+        name, start_time, end_time = input().split()
+        start_time = int(start_time)
+        end_time = int(end_time)
+
+        if start_time < 8 or end_time > 22 or start_time >= end_time:
+            continue
+
+        event = {'name': name, 'start_time': start_time, 'end_time': end_time, 'duration': end_time - start_time}
+        events.append(event)
+
+    # Mengurutkan acara berdasarkan waktu selesai secara menaik
+    sorted_events = sorted(events, key=lambda x: (x['end_time'], -x['duration']))
+
+    selected_events = []  # Daftar acara yang terpilih
+    end_time = 0
+
+    for event in sorted_events:
+        if event['start_time'] >= end_time:
+            selected_events.append(event)
+            end_time = event['end_time']
+
+    return selected_events
+
+# Contoh penggunaan
+selected_events = greedy_schedule()
+
+# Menampilkan acara-acara yang terpilih
+print("Acara yang terpilih:")
+for event in selected_events:
+    print(event['name'])

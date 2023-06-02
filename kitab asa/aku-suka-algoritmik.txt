@@ -1,0 +1,38 @@
+def tokenize(source_code:str):
+    token_list = []
+    stream = list(reversed(source_code))
+    while stream:
+        current_token = ""
+        try:
+            if stream[-1].isnumeric():
+                while stream[-1] in '1234567890.':
+                    current_token += stream.pop()
+            elif stream[-1].isalpha():
+                while stream[-1].isalnum():
+                    current_token += stream.pop()
+            elif stream[-1] not in ' \n':
+                current_token += stream.pop()
+                if current_token == "<" and stream[-1]:
+                    current_token += stream.pop()
+            else:
+                stream.pop()
+                continue
+            token_list.append(current_token)
+        except:
+            token_list.append(current_token)
+
+    return token_list
+
+def identify(tokens: list[str]):
+    for token in tokens:
+        try:
+            float(token)
+            print("CONSTANTS", token)
+        except ValueError:
+            if token.isalnum():
+                print("IDENTIFIER", token,)
+            else:
+                print("OPERATOR", token)
+
+for _ in range(int(input())):
+    identify(tokenize(input()))

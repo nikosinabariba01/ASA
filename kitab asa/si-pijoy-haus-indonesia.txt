@@ -1,0 +1,22 @@
+si-pijoy-haus-indonesia
+
+def find_min_price(n, prices):
+    min_price = float('inf')
+    
+    for price in prices:
+        if price < min_price:
+            min_price = price
+    
+    return min_price
+
+# Membaca input jumlah minuman
+n = int(input())
+
+# Membaca input harga-harga minuman
+prices = list(map(int, input().split()))
+
+# Memanggil fungsi untuk menemukan harga termurah
+result = find_min_price(n, prices)
+
+# Menampilkan harga termurah
+print(result)

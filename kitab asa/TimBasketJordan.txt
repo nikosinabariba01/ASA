@@ -1,0 +1,22 @@
+---TIM BASKET JORDAN---
+def select_team(n, k, player_numbers):
+    # Mengurutkan nomor punggung pemain secara descending
+    player_numbers.sort(reverse=True)
+
+    # Memilih k pemain pertama sebagai anggota tim
+    selected_players = player_numbers[:k]
+
+    return selected_players
+
+# Membaca input jumlah pemain (n) dan jumlah pemain yang akan dipilih (k)
+n, k = map(int, input().split())
+
+# Membaca nomor punggung calon pemain
+player_numbers = list(map(int, input().split()))
+
+# Memanggil fungsi select_team untuk memilih anggota tim
+selected_players = select_team(n, k, player_numbers)
+
+# Menampilkan nomor punggung pemain yang dipilih
+for player in selected_players:
+    print(player, end=' ')

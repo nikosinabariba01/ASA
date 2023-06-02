@@ -1,0 +1,82 @@
+Sebuah kelompok tugas Prakarya ingin membeli rangkaian kain untuk praktik menjahit. Tukang kain tersebut ingin memaksimalkan jumlah pelanggan baru dan pendapatan yang ia peroleh. Untuk mencapai hal ini, ia memutuskan untuk mengalikan harga setiap kain dengan jumlah kain yang telah dibeli oleh pelanggan tersebut ditambah 1. Kain pertama akan memiliki harga asli, (0 + 1) * harga asli, kain berikutnya akan memiliki harga (1 + 1) * harga asli, dan seterusnya.
+
+Diberikan ukuran kelompok teman, jumlah kain yang ingin mereka beli, dan harga asli kain-kain tersebut, kemudian bantulah kelompok tersebut untuk menentukan biaya minimum yang harus dikeluarkan untuk membeli semua kain tersebut. Jumlah kain yang ingin dibeli sama dengan panjang array.
+
+Contoh: c = [1,2,3,4] k = 3
+
+Panjang c = 4, sehingga mereka ingin membeli total 4 kain. Setiap orang akan membeli salah satu kain dengan harga [2,3,4] sesuai harga asli. Dengan setiap orang telah membeli x = 1 kain, kain pertama dalam daftar c[0], sekarang akan memiliki harga (pembelian saat ini + pembelian sebelumnya) * c[0] = (1 + 1) * 1 = 2. Total biaya adalah 2 + 3 + 4 + 2 = 11.
+
+Input Format
+
+Baris pertama berisi dua bilangan bulat yang dipisahkan spasi, yaitu jumlah kain (n) dan jumlah teman (k). Baris kedua berisi n bilangan bulat positif c[i] yang dipisahkan oleh spasi, yaitu harga asli setiap kain.
+
+Constraints
+
+1 ≤ n,k ≤ 100
+1 ≤ c[i] ≤ 10^6
+0 ≤ i< n
+Output Format
+
+biaya minimum untuk membeli semua kain (integer)
+
+Sample Input 0
+
+3 3
+2 5 6
+Sample Output 0
+
+13
+Explanation 0
+
+Terdapat n = 3 kain dengan harga c = [2,5,6] dan k = 3 orang dalam kelompok tersebut. Jika setiap orang membeli satu kain, total biaya yang dibayarkan adalah 2 + 5 + 6 = 13 ringgit.
+
+Sample Input 1
+
+3 2
+2 5 6
+Sample Output 1
+
+15
+Explanation 1
+
+Terdapat n = 3 kain dengan harga c = [2,5,6] dan k = 2 orang dalam kelompok tersebut. Kita dapat meminimalkan biaya total pembelian seperti berikut:
+
+Orang pertama membeli 2 kain secara berurutan dari harga tertinggi ke terendah; ini berarti mereka membeli kain yang lebih mahal (c1 = 5) pertama kali dengan harga p1 = (0 + 1) * 5 = 5 ringgit dan kain yang lebih murah (c0 = 2) kedua dengan harga p0 = (1 + 1) * 2 = 4 ringgit.
+Orang kedua membeli kain paling mahal dengan harga p2 = (0 + 1) * 6 = 6 ringgit. Selanjutnya, hitung jumlah harga pembelian ini, yaitu 5 + 4 + 6 = 15 ringgit.
+Contest ends in 8 days
+Submissions: 0
+Max Score: 100
+Difficulty: Medium
+Rate This Challenge:
+
+    
+More
+Admin Options
+Edit Challenge
+View Submissions
+
+kodingan
+#include<iostream>
+#include<functional>
+#include<algorithm>
+using namespace std;
+
+int c[100];
+
+int main()
+{
+    int n, k;
+    long long ans = 0;
+    cin >> n >> k;
+    for (int i = 0; i < n; i++)
+        cin >> c[i];
+    sort(c, c + n, greater<int>());
+    int cnt = 0;
+    for (int i = 0; i < n; i++)
+    {
+        ans += c[i] * (cnt / k + 1);
+        cnt++;
+    }
+    cout << ans << endl;
+    return 0;
+}

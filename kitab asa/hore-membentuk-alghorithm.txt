@@ -1,0 +1,29 @@
+def count_letters(kalimat):
+    count_dict = {}
+    huruf_diinginkan = ['a', 'l', 'g', 'o', 'r', 'i', 't', 'h', 'm']
+    kata_algorithm = "algorithm"
+    count_algorithm = 0
+    
+    for karakter in kalimat:
+        if karakter in huruf_diinginkan:
+            if karakter in count_dict:
+                count_dict[karakter] += 1
+            else:
+                count_dict[karakter] = 1
+    
+    for huruf in huruf_diinginkan:
+        print("Jumlah huruf '{}' dalam kalimat: {}".format(huruf, count_dict.get(huruf, 0)))
+    
+    if set(huruf_diinginkan).issubset(set(kalimat.lower())):
+        print("Huruf-huruf dikalimatmu dapat membentuk kata 'algorithm'")
+        
+        # Menghitung berapa banyak kata "algorithm" yang dapat dibuat
+        count_algorithm = min([kalimat.lower().count(huruf) // kata_algorithm.count(huruf) for huruf in huruf_diinginkan])
+        print("Banyak kata 'algorithm' yang dapat dibuat: ", count_algorithm)
+    else:
+        print("Huruf-huruf dikalimatmu tidak dapat membentuk kata 'algorithm'")
+
+
+# Meminta masukan kalimat dari pengguna
+masukan_kalimat = input()
+count_letters(masukan_kalimat)

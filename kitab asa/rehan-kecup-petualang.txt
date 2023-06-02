@@ -1,0 +1,21 @@
+def greedy_algorithm(N, places):
+    places.sort(key=lambda x: x[1], reverse=True)
+    total_beauty = 0
+    visited = set()
+    
+    for place in places:
+        if place[0] not in visited:
+            total_beauty += place[1]
+            visited.add(place[0])
+    
+    return total_beauty
+
+N = int(input())
+places = []
+for _ in range(N):
+    x, v = map(int, input().split())
+    places.append((x, v))
+
+result = greedy_algorithm(N, places)
+
+print(result)

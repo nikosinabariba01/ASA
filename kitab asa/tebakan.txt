@@ -1,0 +1,24 @@
+def romawi_genap(romawi):
+    angka_romawi = {'I':1, 'V':5, 'X':10, 'L':50, 'C':100, 'D':500, 'M':1000}
+    angka = 0
+    prev_angka = 0
+    
+    for i in range(len(romawi)-1,-1,-1):
+        curr_angka = angka_romawi[romawi[i]]
+        if curr_angka >= prev_angka:
+            angka += curr_angka
+        else:
+            angka -= curr_angka
+        prev_angka = curr_angka
+
+    return angka % 2 == 0
+
+# Masukkan nilai array
+arr = list(map(str, input().split()))
+
+banyaknya = 0
+for romawi in arr:
+    if romawi_genap(romawi):
+        banyaknya += 1
+
+print(banyaknya)

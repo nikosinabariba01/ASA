@@ -1,0 +1,28 @@
+Nama	: Sana Saffanah
+NIM	: 24060121140143
+Lab	: ASA C
+Judul	: Membakar kalori coklat yang jahat
+
+Kunci jawaban dengan bahasa python 3
+
+
+def calculate_minimum_miles(n, calorie):
+    # Mengurutkan daftar calorie dalam urutan menurun
+    sorted_calorie = sorted(calorie, reverse=True)
+
+    # Menghitung jumlah minimum miles yang diperlukan
+    total_miles = 0
+    for i in range(n):
+        total_miles += (2 ** i) * sorted_calorie[i]
+
+    return total_miles
+
+# Membaca input dari pengguna
+n = int(input())
+calorie = list(map(int, input().split()))
+
+# Menghitung jumlah minimum miles yang diperlukan
+minimum_miles = calculate_minimum_miles(n, calorie)
+
+# Menampilkan output
+print(minimum_miles)

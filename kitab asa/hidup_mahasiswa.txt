@@ -1,0 +1,20 @@
+def maksimalkan_manfaat(n, bobot, nilai, kapasitas, waktu):
+    dp = [[[0 for _ in range(waktu + 1)] for _ in range(kapasitas + 1)] for _ in range(n + 1)]
+
+    for i in range(1, n + 1):
+        for w in range(1, kapasitas + 1):
+            for t in range(1, waktu + 1):
+                if bobot[i - 1] <= w and t >= bobot[i - 1]:
+                    dp[i][w][t] = max(dp[i - 1][w][t], nilai[i - 1] + dp[i - 1][w - bobot[i - 1]][t - bobot[i - 1]])
+                else:
+                    dp[i][w][t] = dp[i - 1][w][t]
+
+    return dp[n][kapasitas][waktu]
+
+n = int(input())
+bobot = list(map(int, input().split()))
+nilai = list(map(int, input().split()))
+kapasitas = int(input())
+waktu = int(input())
+
+print(maksimalkan_manfaat(n, bobot, nilai, kapasitas, waktu))

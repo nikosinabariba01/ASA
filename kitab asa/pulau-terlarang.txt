@@ -1,0 +1,48 @@
+Nama	: Annisa Kumala Dewi  
+NIM	: 24060121120025  
+Lab	: ASA C
+
+def nearest_neighbor_algorithm(distances):
+    n = len(distances)
+    visited = [False] * n
+    visited[0] = True
+    path = [0]
+    total_distance = 0
+
+    for _ in range(n - 1):
+        current_city = path[-1]
+        nearest_city = None
+        min_distance = float('inf')
+
+        for city in range(n):
+            if not visited[city] and distances[current_city][city] < min_distance:
+                min_distance = distances[current_city][city]
+                nearest_city = city
+
+        path.append(nearest_city)
+        visited[nearest_city] = True
+        total_distance += min_distance
+
+    path.append(0)
+    total_distance += distances[path[-2]][0]
+
+    return total_distance
+
+
+# Membaca jumlah kasus uji
+t = int(input())
+
+for _ in range(t):
+    # Membaca jumlah kota
+    n = int(input())
+
+    # Membaca jarak antar kota
+    distances = []
+    for _ in range(n):
+        distances.append(list(map(int, input().split())))
+
+    # Menggunakan algoritma Greedy (Nearest Neighbor) untuk mencari jarak minimal
+    min_distance = nearest_neighbor_algorithm(distances)
+
+    # Menampilkan hasil jarak minimal
+    print(min_distance)

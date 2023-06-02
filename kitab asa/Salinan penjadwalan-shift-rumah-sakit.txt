@@ -1,0 +1,21 @@
+def schedule_shifts(n, m, preferences):
+    # Inisialisasi urutan shift yang dipilih oleh setiap staf
+    schedule = []
+
+    # Loop untuk setiap staf rumah sakit
+    for i in range(n):
+        # Pilih shift berdasarkan preferensi staf
+        chosen_shift = preferences[i].index(min(preferences[i])) + 1
+        schedule.append(chosen_shift)
+
+    return schedule
+
+# Membaca input
+n, m = map(int, input().split())
+preferences = []
+for _ in range(n):
+    preferences.append(list(map(int, input().split())))
+
+# Memanggil fungsi dan mencetak output
+result = schedule_shifts(n, m, preferences)
+print(*result)

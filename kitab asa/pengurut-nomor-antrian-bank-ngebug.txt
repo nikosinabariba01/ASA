@@ -1,0 +1,43 @@
+import random
+
+def partition(arr, low, high):
+    i = (low - 1)
+    pivot = arr[high]
+
+    for j in range(low, high):
+        if arr[j] <= pivot:
+            i = i + 1
+            arr[i], arr[j] = arr[j], arr[i]
+
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+    return i + 1
+
+def randomizedQuickSort(arr, low, high):
+    if low < high:
+        randomIndex = random.randint(low, high)
+        arr[randomIndex], arr[high] = arr[high], arr[randomIndex]
+        pivotIndex = partition(arr, low, high)
+        randomizedQuickSort(arr, low, pivotIndex - 1)
+        randomizedQuickSort(arr, pivotIndex + 1, high)
+
+# Input jumlah antrian nasabah
+n = int(input())
+
+transactions = []
+transaction_set = set()  # Set untuk menyimpan jumlah antrian 
+
+for i in range(n):
+    transaction = int(input()) # Masukkan antrian acak ke
+    
+    # Jika nilai transaksi sudah ada dalam set, cari nomor urut selanjutnya
+    while transaction in transaction_set:
+        transaction += 1
+
+    transactions.append(transaction)
+    transaction_set.add(transaction)
+
+# Mengurutkan antrian nasabah
+randomizedQuickSort(transactions, 0, n - 1)
+
+# Menampilkan hasil pengurutan
+print(transactions)

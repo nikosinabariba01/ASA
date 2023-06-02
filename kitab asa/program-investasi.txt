@@ -1,0 +1,33 @@
+def select_projects(num_projects, duration, profits):
+    selected_projects = []
+    total_profit = 0
+
+    # Membuat daftar proyek beserta indeksnya
+    project_list = list(enumerate(profits, start=1))
+
+    # Mengurutkan proyek berdasarkan tingkat keuntungan harian secara menurun
+    sorted_projects = sorted(project_list, key=lambda x: x[1], reverse=True)
+
+    # Memilih proyek dengan tingkat keuntungan tertinggi sesuai durasi yang tersedia
+    for project in sorted_projects:
+        project_id, profit = project
+        if duration >= 1:
+            selected_projects.append(project_id)
+            total_profit += profit
+            duration -= 1
+
+    return selected_projects, total_profit
+
+# Membaca input dari pengguna
+num_projects = int(input())
+duration = int(input())
+profits = list(map(int, input().split()))
+
+# Panggil fungsi untuk memilih proyek dan menghitung keuntungan
+selected_projects, total_profit = select_projects(num_projects, duration, profits)
+
+# Output
+print("Proyek yang dipilih:")
+for project_id in selected_projects:
+    print("Proyek {}: Tingkat keuntungan harian {}".format(project_id, profits[project_id-1]))
+print("Total keuntungan yang diperoleh:", total_profit)

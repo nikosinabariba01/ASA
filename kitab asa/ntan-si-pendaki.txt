@@ -1,0 +1,39 @@
+import itertools
+
+def hitung_jarak(rute, jarak):
+    total_jarak = 0
+    for i in range(len(rute) - 1):
+        titik_awal = rute[i]
+        titik_tujuan = rute[i + 1]
+        total_jarak += jarak[titik_awal][titik_tujuan]
+    return total_jarak
+
+def brute_force(rute, jarak):
+    permutasi_rute = list(itertools.permutations(rute))
+    jarak_terpendek = float('inf')
+    rute_terpendek = None
+
+    for rute_permutasi in permutasi_rute:
+        jarak_permutasi = hitung_jarak(rute_permutasi, jarak)
+        if jarak_permutasi < jarak_terpendek:
+            jarak_terpendek = jarak_permutasi
+            rute_terpendek = rute_permutasi
+
+    return rute_terpendek, jarak_terpendek
+
+# Input dari pengguna
+titik = []
+jumlah_titik = int(input())
+for i in range(jumlah_titik):
+    titik.append(i+1)
+
+jarak = {}
+for i in range(jumlah_titik):
+    jarak[i+1] = {}
+    for j in range(jumlah_titik):
+        jarak[i+1][j+1] = int(input())
+
+rute_terpendek, jarak_terpendek = brute_force(titik, jarak)
+
+print(rute_terpendek)
+print(jarak_terpendek)

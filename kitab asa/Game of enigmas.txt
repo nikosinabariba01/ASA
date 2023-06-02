@@ -1,0 +1,84 @@
+Pada suatu malam yang gelap, Honey merasakan dirinya terlempar ke dalam dunia virtual yang aneh. Dia terbangun di tengah hutan yang penuh dengan rintangan dan teka-teki misterius. Tiba-tiba, seorang karakter misterius muncul di hadapannya dan memberi tahu Honey bahwa dia terjebak dalam "Game of Enigmas."
+
+Dalam game ini, Honey harus menjelajahi berbagai level yang berbeda, masing-masing dipenuhi dengan teka-teki yang semakin sulit. Untuk melewati setiap level, Honey harus menemukan satu kata rahasia yang tersembunyi di dalam deretan huruf yang tak beraturan tanpa spasi.
+
+Jika Honey berhasil menemukan kata tersebut maka ia akan lanjut ke level berikutnya atau bisa dikatakan "GO TO THE NEXT LEVEL :)", sedangkan jika Honey gagal menemukan kata tersebut maka ia akan berhenti di level itu atau bisa dikatakan "STOP AT THIS LEVEL :(". 
+
+Buatlah implementasi program untuk kasus di atas dengan menerapkan Algoritma Brute Force!
+
+
+Input Format
+1. Baris pertama berisi deret huruf acak (j)
+2. Baris kedua berisi kata rahasia yang akan dicari (i)
+
+Constraints
+1. j dan i harus huruf tanpa spasi
+2. 0<j<51
+3. 0<i<31
+4. Jika melanggar ketentuan di atas maka akan muncul pesan "WARNING!!!"
+
+Output Format
+satu atau beberapa baris yang berisi rincian langkah yang ditempuh untuk menemukan kata rahasia
+satu baris GO TO THE NEXT LEVEL :) atau STOP AT THIS LEVEL :(
+
+
+CODE:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+
+int main(int argc, char *argv[]) {
+    // Kamus
+    int i, j, k, l;
+    char Deret[50], katarahasia[30];
+
+    // Algoritma
+    printf("Masukkan Deret: ");
+    scanf("%49[^\n]%*c", Deret);
+    printf("Masukkan Kata Rahasia: ");
+    scanf("%29[^\n]%*c", katarahasia);
+    printf("\n");
+
+    // Memeriksa apakah ada angka atau spasi pada Deret
+    for (i = 0; Deret[i] != '\0'; i++) {
+        if (!isalpha(Deret[i])) {
+            printf("WARNING!!!\n");
+            return 1;
+        }
+    }
+
+    // Memeriksa apakah ada angka atau spasi pada kata rahasia
+    for (i = 0; katarahasia[i] != '\0'; i++) {
+        if (!isalpha(katarahasia[i])) {
+            printf("WARNING!!!\n");
+            return 1;
+        }
+    }
+
+    j = 0;
+    l = 0;
+
+    while (j <= strlen(Deret) - strlen(katarahasia)) {
+        k = strlen(katarahasia) - 1 + j;
+        for (i = j; i <= k; i++) {
+            printf("%c", Deret[i]);
+            if (Deret[i] == katarahasia[l]) {
+                l++;
+            }
+        }
+        printf("\n");
+        if (l == strlen(katarahasia)) {
+            printf("GO TO THE NEXT LEVEL :)\n");
+            break;
+        }
+        if (j == strlen(Deret) - strlen(katarahasia) && l != strlen(katarahasia)) {
+            printf("STOP AT THIS LEVEL :(\n");
+        }
+        l = 0;
+        j++;
+    }
+
+    return 0;
+}

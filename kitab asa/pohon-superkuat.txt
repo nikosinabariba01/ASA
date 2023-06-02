@@ -1,0 +1,30 @@
+Nama : Zhafira Amanda
+NIM : 24060121140100
+ASA C
+
+from typing import List
+
+def total_kekuatan(daun: List[int]) -> int:
+    n = len(daun)
+
+    if n == 0:
+        return 0
+    elif n == 1:
+        return daun[0]
+
+    dp = [0] * n
+    dp[0] = daun[0]
+    dp[1] = max(daun[0], daun[1])
+
+    for i in range(2, n):
+        dp[i] = max(dp[i-1], dp[i-2] + daun[i])
+
+    return dp[n-1]
+
+
+# Main Program
+n = int(input())
+daun = list(map(int, input().split()))
+
+hasil = total_kekuatan(daun)
+print(hasil)

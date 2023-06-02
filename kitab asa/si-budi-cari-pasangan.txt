@@ -1,0 +1,23 @@
+def find_closest_pair(A, T):
+    n = len(A)
+    diff = float('inf')  # Selisih terkecil diinisialisasi dengan nilai tak terhingga
+    closest_pair = None  # Pasangan bilangan dengan selisih terkecil
+
+    # Iterasi melalui setiap pasangan bilangan dalam array
+    for i in range(n-1):
+        for j in range(i+1, n):
+            pair_sum = A[i] + A[j]
+            current_diff = abs(pair_sum - T)
+
+            # Perbarui selisih terkecil dan pasangan bilangan jika ditemukan selisih yang lebih kecil
+            if current_diff < diff:
+                diff = current_diff
+                closest_pair = (A[i], A[j])
+
+    return closest_pair
+
+# Contoh penggunaan
+A = [4, 7, 9, 2, 5]
+T = 10
+result = find_closest_pair(A, T)
+print("Pasangan bilangan dengan jumlah paling dekat dengan", T, "adalah", result)

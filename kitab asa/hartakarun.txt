@@ -1,0 +1,30 @@
+def find_maximum_treasure(weight_limit, treasures):
+    # Mengurutkan harta karun berdasarkan nilai per berat secara menurun
+    sorted_treasures = sorted(treasures, key=lambda x: x[0] / x[1], reverse=True)
+
+    total_value = 0  # Total nilai harta karun yang diambil
+    total_weight = 0  # Total berat harta karun yang diambil
+
+    for value, weight in sorted_treasures:
+        # Memeriksa apakah harta karun dapat ditambahkan tanpa melebihi batas berat
+        if total_weight + weight <= weight_limit:
+            total_value += value
+            total_weight += weight
+
+    return total_value, total_weight
+
+
+# Membaca batasan berat dan banyaknya harta karun
+weight_limit = int(input())
+num_treasures = int(input())
+
+treasures = []
+for _ in range(num_treasures):
+    value, weight = map(int, input().split())
+    treasures.append((value, weight))
+
+# Memanggil fungsi untuk mencari harta karun dengan total nilai tertinggi
+max_value, max_weight = find_maximum_treasure(weight_limit, treasures)
+
+# Menampilkan output
+print(max_value, max_weight)

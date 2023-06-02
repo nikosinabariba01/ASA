@@ -1,0 +1,70 @@
+Sensus Dina
+Dina adalah seorang pegawai kantor sensus penduduk. Pada satu waktu dina curhat kepada temannya Dino mengenai perkerjaannya. Ia mengeluh terkait pekerjaannya yang begitu melelahkan dan membosankan karena harus mengetuk rumah-rumah penduduk dan menunggu lama di depan rumah penduduk.
+Suatu hari ia diminta oleh atasnya untuk melakukan sensus di lingkungan tersebut lagi. Akan tetapi kali ini ia ditemani oleh rekannya yang mana rekannya akan mengerjakan survei sama rata dengan Dina. Setiap rumah memiliki sejumlah anggota keluarga yang akan disurvei masing yang akan berbanding lurus dengan waktu survei. selain itu waktu menunggu pintu akan dibuka juga berbeda-beda tergantung rumahnya. 
+
+Dino berbaik hati dan ingin membantu Dina untuk membuatkan ia program untuk menentukan setengah dari jumlah seluruh rumah mana yang harus ia kunjungi yang memiliki waktu survei dan waktu tunggu lebih kecil.
+
+
+Input Format : 
+Jumlah rumah
+Array berisikan banyaknya jumlah keluarga dalam suatu rumah sepanjang jumlah rumah
+Array yang berisikan waktu yang dibutuhkan untuk menunggu pintu dibukakan sepanjang jumlah rumah
+
+Output : 
+array berisikan rumah-rumah mana saya yang akan dikunjungin dina 
+
+Sample Input 0
+5
+2 3 4 2 1 
+10 5 8 15 3
+
+Sample Output 0
+5 2  
+
+Explanation 0
+kombinasi rumah dengan waktu kunjung paling cepat adalah rumah urutan kelima, kedua, dan pertama.
+
+
+Sample Output 1
+8
+1 1 1 1 1 1 1 1 1
+2 3 4 5 6 7 8 9
+
+Sample Output 1
+1 2 3 4
+
+Explanation 1
+kombinasi rumah dengan waktu kunjung paling cepat adalah rumah urutan pertama, kedua, dan ketiga.
+
+
+
+Program :
+# fungsi rumah_sensus
+def rumah_sensus(n, rumah, tunggu):
+    if n < 0 or n > 10:
+        raise ValueError("Jumlah rumah yang dimasukkan tidak sesuai constrain")
+
+    if any(x < 0 or x > 10 for x in rumah):
+        raise ValueError("Jumlah keluarga dalam setiap rumah yang dimasukkan tidak sesuai constrain")
+
+    if any(x < 0 for x in tunggu):
+        raise ValueError("Waktu tunggu yang dimasukkan tidak sesuai constrain")
+
+    data_rumah = list(zip(range(1, n+1), rumah, tunggu))
+    data_rumah.sort(key=lambda x: (x[2], x[1]))
+    rumah_dikunjungi = [data_rumah[i][0] for i in range(n // 2)]
+
+    return rumah_dikunjungi
+
+# Input
+n = int(input())
+rumah = list(map(int, input().split()))
+tunggu = list(map(int, input().split()))
+
+# Memanggil fungsi rumah_sensus
+rumah_dikunjungi = rumah_sensus(n, rumah, tunggu)
+
+# Output
+print()
+print(*rumah_dikunjungi)
+

@@ -1,0 +1,27 @@
+def minimum_cost(chickens):
+    n = len(chickens)
+    sorted_chickens = sorted(enumerate(chickens), key=lambda x: x[1])  # Mengurutkan kandang berdasarkan jumlah ayam
+    total_cost = 0
+
+    for i in range(n):
+        current_kandang = sorted_chickens[i][0]  # Kandang saat ini setelah diurutkan
+        original_kandang = sorted_chickens[i][0]  # Kandang asli sebelum diurutkan
+        
+        while current_kandang < i:
+            current_kandang += n  # Mencari kandang dengan indeks yang lebih besar
+        total_cost += abs(current_kandang - i)
+        
+        # Mengatur kembali urutan kandang
+        sorted_chickens[i] = (original_kandang, chickens[original_kandang])
+        chickens[original_kandang] = chickens[current_kandang % n]
+
+    return total_cost
+
+
+# Membaca input dari pengguna
+n = int(input())
+chickens = list(map(int, input().split()))
+
+# Memanggil fungsi minimum_cost dan mencetak output
+cost = minimum_cost(chickens)
+print(cost)

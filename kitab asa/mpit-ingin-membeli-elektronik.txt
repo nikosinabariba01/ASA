@@ -1,0 +1,24 @@
+Alfarizi Hidayah - 24060121130083
+def max_rating(N, B, M, prices, ratings):
+    dp = [[0] * (B + 1) for _ in range(N + 1)]
+    
+    for i in range(1, N + 1):
+        for j in range(1, B + 1):
+            if prices[i] <= j:
+                dp[i][j] = max(dp[i-1][j], ratings[i] + dp[i-1][j-prices[i]])
+            else:
+                dp[i][j] = dp[i-1][j]
+    
+    return dp[N][B]
+
+# Membaca input
+N, B, M = map(int, input().split())
+prices = [0]
+ratings = [0]
+for _ in range(N):
+    H, R = map(int, input().split())
+    prices.append(H)
+    ratings.append(R)
+
+# Memanggil fungsi max_rating dan mencetak output
+print(max_rating(N, B, M, prices, ratings))

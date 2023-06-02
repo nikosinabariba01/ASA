@@ -1,0 +1,40 @@
+from itertools import combinations
+
+def generate_task_sequence(n, tasks, t):
+    max_task_count = 0
+    task_sequence = []
+    
+  
+    for r in range(2, n+1):
+        task_combinations = combinations(tasks, r)
+       
+        for combination in task_combinations:
+            total_time = sum(task[1] for task in combination)
+            if total_time <= t:
+                task_count = len(combination)
+                 
+                if task_count > max_task_count:
+                    max_task_count = task_count
+                    task_sequence = combination
+    
+    return task_sequence
+
+n = int(input())
+
+if n < 1:
+    exit()
+
+tasks = []
+for i in range(n):
+    task = input().split()
+    tasks.append((task[0], int(task[1])))
+
+t = int(input())
+
+result = generate_task_sequence(n, tasks, t)
+
+if len(result) > 0:
+    for task in result:
+        print(task[0], end=" ")
+else:
+    print("Tidak ada tugas yang dapat dikerjakan.")

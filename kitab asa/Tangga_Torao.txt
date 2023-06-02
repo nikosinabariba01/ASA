@@ -1,0 +1,72 @@
+Torao adalah seorang anak dengan keingintahuan yang tinggi. 
+Ketika menaiki tangga, dia ingin mengetahui ada berapa banyak cara berbeda yang dapat dilakukannya untuk mencapai
+
+Langkah terakhir dalam tangga yang terdiri dari n langkah. 
+Bantulah Torao untuk menemukan banyaknya cara dan detail langkah-langkah yang diambil untuk setiap cara, 
+dengan syarat Torao hanya dapat melakukan 1 langkah atau 2 langkah setiap naik tangga.
+
+Input format
+n langkah pada tangga
+
+Output format
+Baris pertama adalah banyaknya cara berbeda untuk mencapai langkah terakhir dalam tangga dengan n langkah.
+Baris kedua dan seterusnya adalah detail langkah-langkah yang dapat diambil.
+Note: Jika n di luar range maka "Tidak mungkin melangkah.."
+
+Kodingan
+def countDistinctSteps(n):
+    if n < 1 or n > 50:
+        return -1
+
+    dp = [0] * (n + 1)
+
+    dp[0] = 1
+    dp[1] = 1
+
+    for i in range(2, n + 1):
+        dp[i] = dp[i - 1] + dp[i - 2]
+
+    return dp[n]
+
+def printDistinctSteps(n):
+    result = countDistinctSteps(n)
+
+    if result == -1:
+        print("Tidak mungkin melangkah..")
+        return
+
+    print(result)
+
+    if n == 0:
+        print("Tidak ada langkah")
+    elif n == 1:
+        print("1")
+    else:
+        dp = [0] * (n + 1)
+        dp[0] = 1
+        dp[1] = 1
+
+        steps = []
+
+        for i in range(2, n + 1):
+            dp[i] = dp[i - 1] + dp[i - 2]
+
+        def printStepsUtil(n, steps):
+            if n <= 0:
+                print("-".join(str(step) for step in steps))
+                return
+
+            if n - 1 >= 0:
+                steps.append(1)
+                printStepsUtil(n - 1, steps)
+                steps.pop()
+
+            if n - 2 >= 0:
+                steps.append(2)
+                printStepsUtil(n - 2, steps)
+                steps.pop()
+
+        printStepsUtil(n, steps)
+
+n = int(input())
+printDistinctSteps(n)

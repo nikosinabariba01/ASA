@@ -1,0 +1,19 @@
+soal:
+Sekelompok orang ingin membeli karangan bunga. Toko bunga Fullsun Blooms ingin memaksimalkan jumlah pelanggan baru dan pendapatan yang mereka hasilkan. Mereka menemukan suatu strategi, yaitu akan mengalikan harga setiap bunga dengan jumlah bunga yang dibeli pelanggan sebelumnya ditambah 1. Bunga pertama adalah harga asli, (0+1) x harga asli, bunga berikutnya adalah (1+1) x harga asli dan seterusnya.
+Pada kasus ini, diberikan jumlah kelompok orang, jumlah bunga yang ingin mereka beli, dan harga asli bunga, tentukan biaya minimum untuk membeli semua bunga. Jumlah bunga yang mereka inginkan sama dengan panjang array c.
+
+code :
+def getMinimumCost(k, c):
+    c = sorted(c, reverse=True)
+    cost = 0
+    previous_purchase = 0
+    for i in range(len(c)):
+        cost += (previous_purchase + 1) * c[i]
+        if (i + 1) % k == 0:
+            previous_purchase += 1
+    return cost
+
+n, k = map(int, input().split())
+c = list(map(int, input().split()))
+result = getMinimumCost(k, c)
+print(result)

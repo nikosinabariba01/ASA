@@ -1,0 +1,15 @@
+def maximumToys(prices, k):
+    prices.sort()
+    count = 0
+    for price in prices:
+        if price <= k:
+            count += 1
+            k -= price
+        else:
+            break
+    return count
+
+n, k = map(int, input().split())
+prices = list(map(int, input().split()))
+result = maximumToys(prices, k)
+print(result)

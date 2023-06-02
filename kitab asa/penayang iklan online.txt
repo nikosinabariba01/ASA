@@ -1,0 +1,21 @@
+def maximum_advertisement_revenue(n, m, slot_values, ad_values):
+    # Mengurutkan nilai tayang slot iklan dan iklan yang tersedia secara menurun
+    slot_values.sort(reverse=True)
+    ad_values.sort(reverse=True)
+    
+    revenue = 0
+    
+    # Memasangkan iklan dengan nilai tayang tertinggi pada slot iklan dengan nilai tayang tertinggi
+    for i in range(n):
+        revenue += slot_values[i] * ad_values[i]
+    
+    return revenue
+
+# Membaca masukan dari pengguna
+n, m = map(int, input().split())
+slot_values = list(map(int, input().split()))
+ad_values = list(map(int, input().split()))
+
+# Memanggil fungsi dan mencetak hasilnya
+result = maximum_advertisement_revenue(n, m, slot_values, ad_values)
+print(result)

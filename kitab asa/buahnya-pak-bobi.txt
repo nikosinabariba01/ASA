@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int N, A, B;
+    scanf("%d %d %d", &N, &A, &B);
+
+    int berat_total = A + B, ambil_apel = 0;
+
+    for (int i = 1; i <= N; i++) {
+        if ((i * A) % berat_total == 0 || (i * B) % berat_total == 0) {
+            ambil_apel = i;
+            break;
+        }
+    }
+
+    printf("%d\n", ambil_apel);
+    return 0;
+}

@@ -1,0 +1,23 @@
+def find_pattern(text, pattern):
+    pattern_len = len(pattern)
+    text_len = len(text)
+    count = 0
+
+    for i in range(text_len - pattern_len + 1):
+        substring = text[i:i+pattern_len]
+        if substring == pattern:
+            count += 1
+            print(substring)
+
+    return count
+
+# Membaca input dari pengguna
+text = input("")
+pattern = input("")
+
+# Mencari pattern dan mencetak hasil
+count = find_pattern(text, pattern)
+if count > 0:
+    print("Pattern ditemukan!!")
+else:
+    print("Pattern tidak ditemukan.")
